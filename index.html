@@ -1,0 +1,72 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#FF69B4">
+  <title>专属定制页面</title>
+  <link rel="manifest" href="manifest.json">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(to right, #ff9a9e, #fad0c4);
+      font-family: 'Arial', sans-serif;
+      overflow: hidden;
+    }
+    h1 {
+      color: white;
+      font-size: 3rem;
+      text-align: center;
+    }
+    button {
+      position: absolute;
+      bottom: 20px;
+      padding: 10px 20px;
+      background-color: #ff69b4;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1 id="custom-message">加载中...</h1>
+  <button onclick="playMusic()">播放音乐</button>
+
+  <audio id="background-music">
+    <source src="your-music-file.mp3" type="audio/mpeg">
+    您的浏览器不支持音频播放。
+  </audio>
+
+  <script>
+    function getUserMessage() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const user = urlParams.get('user');
+      const messageElement = document.getElementById('custom-message');
+
+      if (user === '12345') {
+        messageElement.innerText = '张三，我爱你，永远！';
+      } else if (user === '67890') {
+        messageElement.innerText = '李四，你是我的唯一！';
+      } else {
+        messageElement.innerText = '我爱你，永远！';
+      }
+    }
+
+    function playMusic() {
+      const music = document.getElementById('background-music');
+      music.play();
+    }
+
+    getUserMessage();
+  </script>
+</body>
+</html>
