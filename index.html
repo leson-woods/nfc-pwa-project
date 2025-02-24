@@ -55,4 +55,46 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      console.log("页面已加载，开始执行 getUs
+      console.log("页面已加载，开始执行 getUserMessage 函数");
+
+      // 定制化消息，根据 URL 参数显示不同内容
+      function getUserMessage() {
+        console.log("开始执行 getUserMessage 函数");
+        const urlParams = new URLSearchParams(window.location.search);
+        const user = urlParams.get('user');
+        const messageElement = document.getElementById('custom-message');
+
+        if (user) {
+          console.log("获取到 user 参数: ", user);
+          const messages = {
+            "12345": "张三，我爱你，永远！",
+            "67890": "李四，你是我的唯一！",
+            "11223": "宝贝，今天是我们的纪念日！"
+          };
+          messageElement.innerText = messages[user] || "我爱你，永远！";
+        } else {
+          console.log("未获取到 user 参数");
+          messageElement.innerText = "我爱你，永远！";
+        }
+      }
+
+      // 播放音乐功能
+      document.getElementById('play-music').addEventListener('click', function () {
+        const audio = document.getElementById('background-music');
+        if (audio.paused) {
+          audio.play().then(() => {
+            console.log("音乐播放成功");
+          }).catch((error) => {
+            console.log("播放失败:", error);
+          });
+        } else {
+          audio.pause();
+        }
+      });
+
+      // 执行消息函数
+      getUserMessage();
+    });
+  </script>
+</body>
+</html>
