@@ -7,13 +7,12 @@
   <title>专属定制页面</title>
   <link rel="manifest" href="manifest.json">
 
-  <!-- Favicon 图标设置 -->
+  <!-- Favicon 设置 -->
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="manifest" href="/site.webmanifest">
 
-  <!-- 样式设置 -->
   <style>
     body {
       margin: 0;
@@ -55,13 +54,5 @@
   </audio>
 
   <script>
-    // 定制化消息，根据 URL 参数显示不同内容
-    const messages = {
-      "12345": "张三，我爱你，永远！",
-      "67890": "李四，你是我的唯一！",
-      "11223": "宝贝，今天是我们的纪念日！",
-      "default": "我爱你，永远！"
-    };
-
-    function getUserMessage() {
-      const urlPa
+    document.addEventListener("DOMContentLoaded", () => {
+      console.log("页面已加载，开始执行 getUs
