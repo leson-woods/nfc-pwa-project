@@ -42,30 +42,6 @@
       font-size: 1.2rem;
       cursor: pointer;
     }
-
-    /* 安装到主屏幕按钮样式优化 */
-    #install-button {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      padding: 10px 20px;
-      background-color: #ff69b4;
-      color: white;
-      border: none;
-      border-radius: 20px;
-      font-size: 1rem;
-      cursor: pointer;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      transition: all 0.3s ease;
-      max-width: 200px;
-      min-width: 100px;
-      text-align: center;
-    }
-
-    #install-button:hover {
-      background-color: #ff85c1;
-      transform: scale(1.05);
-    }
   </style>
 </head>
 <body>
@@ -88,59 +64,4 @@
     };
 
     function getUserMessage() {
-      const urlParams = new URLSearchParams(window.location.search);
-      const user = urlParams.get('user');
-      const messageElement = document.getElementById('custom-message');
-
-      if (user && messages[user]) {
-        messageElement.innerText = messages[user];
-      } else {
-        messageElement.innerText = messages["default"];
-      }
-    }
-
-    // 播放音乐功能
-    document.getElementById('play-music').addEventListener('click', function () {
-      const audio = document.getElementById('background-music');
-      if (audio.paused) {
-        audio.play().then(() => {
-          console.log("音乐播放成功");
-        }).catch((error) => {
-          console.log("播放失败:", error);
-        });
-      } else {
-        audio.pause();
-      }
-    });
-
-    // 安装到主屏幕功能
-    let deferredPrompt;
-    window.addEventListener('beforeinstallprompt', (e) => {
-      e.preventDefault();
-      deferredPrompt = e;
-
-      // 创建安装按钮
-      const installButton = document.createElement('button');
-      installButton.textContent = '安装到主屏幕';
-      installButton.id = 'install-button';
-      document.body.appendChild(installButton);
-
-      // 点击安装按钮
-      installButton.addEventListener('click', async () => {
-        deferredPrompt.prompt();
-        const { outcome } = await deferredPrompt.userChoice;
-        if (outcome === 'accepted') {
-          console.log('用户接受了安装');
-        } else {
-          console.log('用户拒绝了安装');
-        }
-        deferredPrompt = null;
-        installButton.remove();
-      });
-    });
-
-    // 页面加载时显示定制消息
-    getUserMessage();
-  </script>
-</body>
-</html>
+      const urlPa
