@@ -22,13 +22,13 @@
       "src": "/screenshot-800x600.png",
       "sizes": "800x600",
       "type": "image/png",
-      "form_factor": "narrow"
+      "form_factor": "wide"
     },
     {
-      "src": "/screenshot-800x800.png",
-      "sizes": "800x800",
+      "src": "/screenshot-600x800.png",
+      "sizes": "600x800",
       "type": "image/png",
-      "form_factor": "wide"
+      "form_factor": "narrow"
     }
   ]
 }
