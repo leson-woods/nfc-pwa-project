@@ -7,12 +7,13 @@
   <title>专属定制页面</title>
   <link rel="manifest" href="manifest.json">
 
-  <!-- Favicon 图标相关链接 -->
+  <!-- Favicon 图标设置 -->
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="manifest" href="/site.webmanifest">
 
+  <!-- 样式设置 -->
   <style>
     body {
       margin: 0;
@@ -41,19 +42,44 @@
       font-size: 1.2rem;
       cursor: pointer;
     }
+
+    /* 安装到主屏幕按钮样式优化 */
+    #install-button {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      padding: 10px 20px;
+      background-color: #ff69b4;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      max-width: 200px;
+      min-width: 100px;
+      text-align: center;
+    }
+
+    #install-button:hover {
+      background-color: #ff85c1;
+      transform: scale(1.05);
+    }
   </style>
 </head>
 <body>
   <h1 id="custom-message">加载中...</h1>
   <button id="play-music">播放音乐</button>
 
+  <!-- 音乐播放器 -->
   <audio id="background-music">
     <source src="/background-music.mp3" type="audio/mpeg">
     您的浏览器不支持音频播放。
   </audio>
 
   <script>
-    // 专属定制信息，根据 URL 参数显示不同内容
+    // 定制化消息，根据 URL 参数显示不同内容
     const messages = {
       "12345": "张三，我爱你，永远！",
       "67890": "李四，你是我的唯一！",
@@ -87,28 +113,19 @@
       }
     });
 
-    // PWA 安装提示
+    // 安装到主屏幕功能
     let deferredPrompt;
     window.addEventListener('beforeinstallprompt', (e) => {
       e.preventDefault();
       deferredPrompt = e;
 
-      // 显示安装按钮
+      // 创建安装按钮
       const installButton = document.createElement('button');
       installButton.textContent = '安装到主屏幕';
-      installButton.style.position = 'absolute';
-      installButton.style.top = '20px';
-      installButton.style.right = '20px';
-      installButton.style.padding = '10px 20px';
-      installButton.style.backgroundColor = '#ff69b4';
-      installButton.style.color = 'white';
-      installButton.style.border = 'none';
-      installButton.style.borderRadius = '20px';
-      installButton.style.fontSize = '1rem';
-      installButton.style.cursor = 'pointer';
-
+      installButton.id = 'install-button';
       document.body.appendChild(installButton);
 
+      // 点击安装按钮
       installButton.addEventListener('click', async () => {
         deferredPrompt.prompt();
         const { outcome } = await deferredPrompt.userChoice;
@@ -122,7 +139,7 @@
       });
     });
 
-    // 页面加载时获取用户信息
+    // 页面加载时显示定制消息
     getUserMessage();
   </script>
 </body>
