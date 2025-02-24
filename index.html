@@ -6,6 +6,13 @@
   <meta name="theme-color" content="#FF69B4">
   <title>专属定制页面</title>
   <link rel="manifest" href="manifest.json">
+
+  <!-- Favicon 图标相关链接 -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+
   <style>
     body {
       margin: 0;
@@ -46,24 +53,6 @@
   </audio>
 
   <script>
-    // 触发全屏显示功能
-    function launchFullScreen(element) {
-      if (element.requestFullscreen) {
-        element.requestFullscreen();
-      } else if (element.mozRequestFullScreen) { // Firefox
-        element.mozRequestFullScreen();
-      } else if (element.webkitRequestFullscreen) { // Chrome, Safari, Opera
-        element.webkitRequestFullscreen();
-      } else if (element.msRequestFullscreen) { // IE/Edge
-        element.msRequestFullscreen();
-      }
-    }
-
-    // 页面加载后自动进入全屏模式
-    window.onload = () => {
-      launchFullScreen(document.documentElement);
-    };
-
     // 专属定制信息，根据 URL 参数显示不同内容
     const messages = {
       "12345": "张三，我爱你，永远！",
@@ -84,7 +73,7 @@
       }
     }
 
-    // 播放音乐
+    // 播放音乐功能
     document.getElementById('play-music').addEventListener('click', function () {
       const audio = document.getElementById('background-music');
       if (audio.paused) {
@@ -114,4 +103,27 @@
       installButton.style.backgroundColor = '#ff69b4';
       installButton.style.color = 'white';
       installButton.style.border = 'none';
-      installButton.style.
+      installButton.style.borderRadius = '20px';
+      installButton.style.fontSize = '1rem';
+      installButton.style.cursor = 'pointer';
+
+      document.body.appendChild(installButton);
+
+      installButton.addEventListener('click', async () => {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        if (outcome === 'accepted') {
+          console.log('用户接受了安装');
+        } else {
+          console.log('用户拒绝了安装');
+        }
+        deferredPrompt = null;
+        installButton.remove();
+      });
+    });
+
+    // 页面加载时获取用户信息
+    getUserMessage();
+  </script>
+</body>
+</html>
