@@ -40,29 +40,51 @@
   <h1 id="custom-message">加载中...</h1>
   <button id="play-music">播放音乐</button>
 
-  <!-- 正确引用 MP3 文件 -->
   <audio id="background-music">
     <source src="/background-music.mp3" type="audio/mpeg">
     您的浏览器不支持音频播放。
   </audio>
 
   <script>
-    // 动态显示定制化信息
+    // 触发全屏显示功能
+    function launchFullScreen(element) {
+      if (element.requestFullscreen) {
+        element.requestFullscreen();
+      } else if (element.mozRequestFullScreen) { // Firefox
+        element.mozRequestFullScreen();
+      } else if (element.webkitRequestFullscreen) { // Chrome, Safari, Opera
+        element.webkitRequestFullscreen();
+      } else if (element.msRequestFullscreen) { // IE/Edge
+        element.msRequestFullscreen();
+      }
+    }
+
+    // 页面加载后自动进入全屏模式
+    window.onload = () => {
+      launchFullScreen(document.documentElement);
+    };
+
+    // 专属定制信息，根据 URL 参数显示不同内容
+    const messages = {
+      "12345": "张三，我爱你，永远！",
+      "67890": "李四，你是我的唯一！",
+      "11223": "宝贝，今天是我们的纪念日！",
+      "default": "我爱你，永远！"
+    };
+
     function getUserMessage() {
       const urlParams = new URLSearchParams(window.location.search);
       const user = urlParams.get('user');
       const messageElement = document.getElementById('custom-message');
 
-      if (user === '12345') {
-        messageElement.innerText = '张三，我爱你，永远！';
-      } else if (user === '67890') {
-        messageElement.innerText = '李四，你是我的唯一！';
+      if (user && messages[user]) {
+        messageElement.innerText = messages[user];
       } else {
-        messageElement.innerText = '我爱你，永远！';
+        messageElement.innerText = messages["default"];
       }
     }
 
-    // 播放音乐功能，解决播放限制问题
+    // 播放音乐
     document.getElementById('play-music').addEventListener('click', function () {
       const audio = document.getElementById('background-music');
       if (audio.paused) {
@@ -76,8 +98,20 @@
       }
     });
 
-    // 执行自定义消息显示
-    getUserMessage();
-  </script>
-</body>
-</html>
+    // PWA 安装提示
+    let deferredPrompt;
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+
+      // 显示安装按钮
+      const installButton = document.createElement('button');
+      installButton.textContent = '安装到主屏幕';
+      installButton.style.position = 'absolute';
+      installButton.style.top = '20px';
+      installButton.style.right = '20px';
+      installButton.style.padding = '10px 20px';
+      installButton.style.backgroundColor = '#ff69b4';
+      installButton.style.color = 'white';
+      installButton.style.border = 'none';
+      installButton.style.

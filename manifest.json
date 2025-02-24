@@ -2,7 +2,7 @@
   "name": "专属定制 PWA",
   "short_name": "NFC PWA",
   "start_url": "/",
-  "display": "fullscreen",
+  "display": "standalone",
   "background_color": "#FF69B4",
   "theme_color": "#FF69B4",
   "icons": [
@@ -22,12 +22,13 @@
       "src": "/screenshot-800x600.png",
       "sizes": "800x600",
       "type": "image/png",
-      "form_factor": "wide"
+      "form_factor": "narrow"
     },
     {
-      "src": "/screenshot-600x800.png",
-      "sizes": "600x800",
-      "type": "image/png"
+      "src": "/screenshot-800x800.png",
+      "sizes": "800x800",
+      "type": "image/png",
+      "form_factor": "wide"
     }
   ]
 }
