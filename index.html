@@ -59,7 +59,7 @@
     <div class="container">
         <h1>To My Love, Forever and Always ❤️</h1>
         <button class="button" id="playPauseButton">🎵 Play Music</button>
-        <audio id="bgMusic" src="assets/background-music.mp3" loop></audio>
+        <audio id="bgMusic" src="assets/background-music.mp3" loop muted></audio>
     </div>
 
     <script>
@@ -77,14 +77,15 @@
                 }
             }
             
-            // 延迟 1.5 秒尝试直接播放音频，而不是点击按钮
-            setTimeout(() => {
-                audio.play().then(() => {
+            // 先尝试静音播放，绕过浏览器拦截
+            audio.play().then(() => {
+                setTimeout(() => {
+                    audio.muted = false; // 1.5秒后解除静音
                     playPauseButton.textContent = "⏸ Pause Music";
-                }).catch(error => {
-                    console.log("Autoplay blocked, requiring user interaction: ", error);
-                });
-            }, 1500);
+                }, 1500);
+            }).catch(error => {
+                console.log("Autoplay blocked, requiring user interaction: ", error);
+            });
             
             playPauseButton.addEventListener("click", togglePlayPause);
         });
