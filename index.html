@@ -77,7 +77,7 @@
                 }
             }
             
-            // 监听用户的第一个交互事件，解除静音并播放音乐
+            // 监听用户的第一个点击或触摸事件，立即解除静音并播放音乐
             function enableAudioPlayback() {
                 audio.muted = false;
                 audio.play().then(() => {
@@ -89,14 +89,10 @@
                 // 只监听一次用户交互，触发后移除监听器
                 document.removeEventListener("click", enableAudioPlayback);
                 document.removeEventListener("touchstart", enableAudioPlayback);
-                document.removeEventListener("scroll", enableAudioPlayback);
-                document.removeEventListener("keydown", enableAudioPlayback);
             }
             
-            document.addEventListener("click", enableAudioPlayback);
-            document.addEventListener("touchstart", enableAudioPlayback);
-            document.addEventListener("scroll", enableAudioPlayback);
-            document.addEventListener("keydown", enableAudioPlayback);
+            document.addEventListener("click", enableAudioPlayback, { once: true });
+            document.addEventListener("touchstart", enableAudioPlayback, { once: true });
             
             playPauseButton.addEventListener("click", togglePlayPause);
         });
