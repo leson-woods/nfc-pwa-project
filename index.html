@@ -77,9 +77,13 @@
                 }
             }
             
-            // 延迟 1.5 秒后尝试播放音乐，模拟用户交互
+            // 延迟 1.5 秒尝试直接播放音频，而不是点击按钮
             setTimeout(() => {
-                playPauseButton.click();
+                audio.play().then(() => {
+                    playPauseButton.textContent = "⏸ Pause Music";
+                }).catch(error => {
+                    console.log("Autoplay blocked, requiring user interaction: ", error);
+                });
             }, 1500);
             
             playPauseButton.addEventListener("click", togglePlayPause);
