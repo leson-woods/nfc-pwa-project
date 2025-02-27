@@ -1,116 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#C9A86A">
-  <title>Love Engraved UAE</title>
-  
-  <!-- PWA Related -->
-  <link rel="manifest" href="manifest.json">
-
-  <!-- Favicon -->
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-  <link rel="manifest" href="/site.webmanifest">
-
-  <!-- CSS Styles -->
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background: url('assets/bg-luxury.png') no-repeat center center;
-      background-size: cover;
-      font-family: 'Arial', sans-serif;
-      overflow: hidden;
-      text-align: center;
-    }
-
-    h1 {
-      color: #FFD700;
-      font-size: 3rem;
-      font-weight: bold;
-      text-shadow: 2px 2px 10px rgba(255, 215, 0, 0.8);
-      margin-bottom: 20px;
-    }
-
-    button {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 12px 25px;
-      background: linear-gradient(145deg, #C9A86A, #FFD700);
-      color: black;
-      border: none;
-      border-radius: 30px;
-      font-size: 1.2rem;
-      font-weight: bold;
-      cursor: pointer;
-      box-shadow: 0px 5px 15px rgba(255, 215, 0, 0.6);
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-
-    button:hover {
-      transform: scale(1.05);
-      box-shadow: 0px 8px 20px rgba(255, 215, 0, 0.8);
-    }
-
-    button img {
-      width: 24px;
-      height: 24px;
-    }
-
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Engraved</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: url('your-background-image.jpg') no-repeat center center/cover;
+            font-family: 'Playfair Display', serif;
+            text-align: center;
+            color: #D4AF37; /* 柔和金色 */
+        }
+        .container {
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        h1 {
+            font-size: 32px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 1.5s ease-in-out;
+        }
+        .button {
+            display: inline-block;
+            background: linear-gradient(135deg, #B8860B, #FFD700);
+            color: #5A4637;
+            padding: 12px 25px;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        .button:hover {
+            background: linear-gradient(135deg, #FFD700, #B8860B);
+            transform: scale(1.05);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
 </head>
 <body>
-
-  <h1 id="custom-message">Loading...</h1>
-
-  <button id="play-music">
-    <img src="assets/music-icon.png" alt="Music">
-    Play Music
-  </button>
-
-  <audio id="background-music" loop>
-    <source src="/background-music.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
-
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      console.log("Page loaded, initializing...");
-
-      const urlParams = new URLSearchParams(window.location.search);
-      const user = urlParams.get('user');
-      const messageElement = document.getElementById('custom-message');
-
-      if (user === '12345') {
-        messageElement.innerText = 'To My Love, Forever and Always 💖';
-      } else if (user === '67890') {
-        messageElement.innerText = 'You Are My Everything 💍✨';
-      } else {
-        messageElement.innerText = 'Love Engraved, Forever Remembered ✨';
-      }
-
-      const musicButton = document.getElementById('play-music');
-      const audio = document.getElementById('background-music');
-
-      musicButton.addEventListener('click', () => {
-        if (audio.paused) {
-          audio.play();
-        } else {
-          audio.pause();
-        }
-      });
-
-    });
-  </script>
-
+    <div class="container">
+        <h1>To My Love, Forever and Always ❤️</h1>
+        <a href="#" class="button">🎵 Play Music</a>
+    </div>
 </body>
 </html>
