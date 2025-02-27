@@ -66,10 +66,9 @@
         document.addEventListener("DOMContentLoaded", function() {
             var audio = document.getElementById("bgMusic");
             var playPauseButton = document.getElementById("playPauseButton");
-            var isPlaying = false;
             
-            // 点击按钮或页面播放/暂停音乐
-            function togglePlayPause() {
+            // 点击按钮播放/暂停音乐
+            playPauseButton.addEventListener("click", function() {
                 if (audio.paused) {
                     audio.play();
                     playPauseButton.textContent = "⏸ Pause Music";
@@ -77,10 +76,7 @@
                     audio.pause();
                     playPauseButton.textContent = "🎵 Play Music";
                 }
-            }
-            
-            playPauseButton.addEventListener("click", togglePlayPause);
-            document.body.addEventListener("click", togglePlayPause);
+            });
         });
     </script>
 </body>
