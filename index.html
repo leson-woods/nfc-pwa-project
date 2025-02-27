@@ -59,28 +59,28 @@
     <div class="container">
         <h1>To My Love, Forever and Always ❤️</h1>
         <button class="button" id="playPauseButton">🎵 Play Music</button>
-        <video id="bgVideo" src="assets/background-video.mp4" autoplay loop playsinline muted></video>
+        <audio id="bgMusic" src="assets/background-music.mp3" loop muted></audio>
     </div>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            var video = document.getElementById("bgVideo");
+            var audio = document.getElementById("bgMusic");
             var playPauseButton = document.getElementById("playPauseButton");
             
             function togglePlayPause() {
-                if (video.paused) {
-                    video.play();
+                if (audio.paused) {
+                    audio.play();
                     playPauseButton.textContent = "⏸ Pause Music";
                 } else {
-                    video.pause();
+                    audio.pause();
                     playPauseButton.textContent = "🎵 Play Music";
                 }
             }
             
             // 监听用户的第一个交互事件，解除静音并播放音乐
             function enableAudioPlayback() {
-                video.muted = false;
-                video.play().then(() => {
+                audio.muted = false;
+                audio.play().then(() => {
                     playPauseButton.textContent = "⏸ Pause Music";
                 }).catch(error => {
                     console.log("Playback still blocked: ", error);
