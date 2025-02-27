@@ -3,9 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#000000">
+  <meta name="theme-color" content="#C9A86A">
   <title>Love Engraved UAE</title>
+  
+  <!-- PWA Related -->
   <link rel="manifest" href="manifest.json">
+
+  <!-- Favicon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+
+  <!-- CSS Styles -->
   <style>
     body {
       margin: 0;
@@ -15,54 +25,92 @@
       justify-content: center;
       align-items: center;
       height: 100vh;
-      background: linear-gradient(to right, #1a1a1a, #4d4d4d);
+      background: url('assets/bg-luxury.png') no-repeat center center;
+      background-size: cover;
       font-family: 'Arial', sans-serif;
       overflow: hidden;
-      color: white;
       text-align: center;
     }
+
     h1 {
+      color: #FFD700;
       font-size: 3rem;
-      text-shadow: 2px 2px 8px gold;
-    }
-    .button {
-      padding: 12px 24px;
-      background: linear-gradient(135deg, gold, white);
-      color: black;
       font-weight: bold;
+      text-shadow: 2px 2px 10px rgba(255, 215, 0, 0.8);
+      margin-bottom: 20px;
+    }
+
+    button {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 25px;
+      background: linear-gradient(145deg, #C9A86A, #FFD700);
+      color: black;
       border: none;
       border-radius: 30px;
-      font-size: 1.5rem;
+      font-size: 1.2rem;
+      font-weight: bold;
       cursor: pointer;
-      transition: all 0.3s ease-in-out;
-      box-shadow: 0px 5px 15px rgba(255, 215, 0, 0.5);
+      box-shadow: 0px 5px 15px rgba(255, 215, 0, 0.6);
+      transition: transform 0.2s, box-shadow 0.2s;
     }
-    .button:hover {
-      background: linear-gradient(135deg, white, gold);
+
+    button:hover {
+      transform: scale(1.05);
       box-shadow: 0px 8px 20px rgba(255, 215, 0, 0.8);
     }
+
+    button img {
+      width: 24px;
+      height: 24px;
+    }
+
   </style>
 </head>
 <body>
-  <h1 id="custom-message">Love Engraved, Forever Remembered ✨</h1>
-  <button class="button" id="play-music">🎵 Play Music</button>
+
+  <h1 id="custom-message">Loading...</h1>
+
+  <button id="play-music">
+    <img src="assets/music-icon.png" alt="Music">
+    Play Music
+  </button>
+
   <audio id="background-music" loop>
     <source src="/background-music.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
   </audio>
+
   <script>
-    document.getElementById('play-music').addEventListener('click', function () {
-      const audio = document.getElementById('background-music');
-      if (audio.paused) {
-        audio.play().then(() => {
-          console.log("Music started successfully");
-        }).catch((error) => {
-          console.log("Playback failed:", error);
-        });
+    document.addEventListener("DOMContentLoaded", () => {
+      console.log("Page loaded, initializing...");
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const user = urlParams.get('user');
+      const messageElement = document.getElementById('custom-message');
+
+      if (user === '12345') {
+        messageElement.innerText = 'To My Love, Forever and Always 💖';
+      } else if (user === '67890') {
+        messageElement.innerText = 'You Are My Everything 💍✨';
       } else {
-        audio.pause();
+        messageElement.innerText = 'Love Engraved, Forever Remembered ✨';
       }
+
+      const musicButton = document.getElementById('play-music');
+      const audio = document.getElementById('background-music');
+
+      musicButton.addEventListener('click', () => {
+        if (audio.paused) {
+          audio.play();
+        } else {
+          audio.pause();
+        }
+      });
+
     });
   </script>
+
 </body>
 </html>
