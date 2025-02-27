@@ -77,15 +77,20 @@
                 }
             }
             
-            // 先尝试静音播放，绕过浏览器拦截
-            audio.play().then(() => {
-                setTimeout(() => {
-                    audio.muted = false; // 1.5秒后解除静音
+            // 监听用户与页面的第一次交互，触发播放
+            function enableAudioPlayback() {
+                audio.muted = false;
+                audio.play().then(() => {
                     playPauseButton.textContent = "⏸ Pause Music";
-                }, 1500);
-            }).catch(error => {
-                console.log("Autoplay blocked, requiring user interaction: ", error);
-            });
+                }).catch(error => {
+                    console.log("Playback still blocked: ", error);
+                });
+                document.removeEventListener("click", enableAudioPlayback);
+                document.removeEventListener("touchstart", enableAudioPlayback);
+            }
+            
+            document.addEventListener("click", enableAudioPlayback);
+            document.addEventListener("touchstart", enableAudioPlayback);
             
             playPauseButton.addEventListener("click", togglePlayPause);
         });
