@@ -49,6 +49,13 @@
             background: linear-gradient(135deg, #FFD700, #B8860B);
             transform: scale(1.05);
         }
+        .hidden-button {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            opacity: 0;
+            pointer-events: none;
+        }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(-10px); }
             to { opacity: 1; transform: translateY(0); }
@@ -59,13 +66,15 @@
     <div class="container">
         <h1>To My Love, Forever and Always ❤️</h1>
         <button class="button" id="playPauseButton">🎵 Play Music</button>
-        <audio id="bgMusic" src="assets/background-music.mp3" loop muted></audio>
+        <button class="hidden-button" id="hiddenPlayButton"></button>
+        <audio id="bgMusic" src="assets/background-music.mp3" loop></audio>
     </div>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             var audio = document.getElementById("bgMusic");
             var playPauseButton = document.getElementById("playPauseButton");
+            var hiddenPlayButton = document.getElementById("hiddenPlayButton");
             
             function togglePlayPause() {
                 if (audio.paused) {
@@ -77,22 +86,18 @@
                 }
             }
             
-            // 监听用户交互，确保安卓浏览器能触发播放
-            function enableAudioPlayback() {
-                audio.muted = false;
+            // 1.5 秒后模拟点击隐藏播放按钮
+            setTimeout(() => {
+                hiddenPlayButton.click();
+            }, 1500);
+            
+            hiddenPlayButton.addEventListener("click", function() {
                 audio.play().then(() => {
                     playPauseButton.textContent = "⏸ Pause Music";
                 }).catch(error => {
-                    console.log("Playback still blocked: ", error);
+                    console.log("Autoplay blocked, requiring user interaction: ", error);
                 });
-                document.removeEventListener("click", enableAudioPlayback);
-                document.removeEventListener("touchstart", enableAudioPlayback);
-                document.removeEventListener("scroll", enableAudioPlayback);
-            }
-            
-            document.addEventListener("click", enableAudioPlayback);
-            document.addEventListener("touchstart", enableAudioPlayback);
-            document.addEventListener("scroll", enableAudioPlayback);
+            });
             
             playPauseButton.addEventListener("click", togglePlayPause);
         });
