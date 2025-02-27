@@ -15,16 +15,16 @@
             background: url('assets/background.jpg') no-repeat center center/cover;
             font-family: 'Playfair Display', serif;
             text-align: center;
-            color: #D4AF37; /* 柔和金色 */
+            color: #D4AF37;
         }
         .container {
-            width: 80%; /* 让框的大小自适应 */
-            max-width: 600px; /* 限制最大宽度，避免过大 */
+            width: 80%;
+            max-width: 600px;
             padding: 30px;
-            background: rgba(0, 0, 0, 0.4); /* 透明度调整，让背景更融合 */
+            background: rgba(0, 0, 0, 0.4);
             border-radius: 15px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(8px); /* 增加更自然的模糊效果 */
+            backdrop-filter: blur(8px);
         }
         h1 {
             font-size: 36px;
@@ -58,7 +58,15 @@
 <body>
     <div class="container">
         <h1>To My Love, Forever and Always ❤️</h1>
-        <a href="#" class="button">🎵 Play Music</a>
+        <button class="button">🎵 Play Music</button>
+        <audio id="bgMusic" src="assets/background-music.mp3" autoplay loop></audio>
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var audio = document.getElementById("bgMusic");
+            audio.play().catch(error => console.log("Autoplay blocked by browser: ", error));
+        });
+    </script>
 </body>
 </html>
