@@ -18,13 +18,16 @@
             color: #D4AF37; /* 柔和金色 */
         }
         .container {
-            padding: 20px;
-            background: rgba(0, 0, 0, 0.6);
+            width: 80%; /* 让框的大小自适应 */
+            max-width: 600px; /* 限制最大宽度，避免过大 */
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.4); /* 透明度调整，让背景更融合 */
             border-radius: 15px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(8px); /* 增加更自然的模糊效果 */
         }
         h1 {
-            font-size: 32px;
+            font-size: 36px;
             text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
             animation: fadeIn 1.5s ease-in-out;
         }
@@ -32,13 +35,13 @@
             display: inline-block;
             background: linear-gradient(135deg, #B8860B, #FFD700);
             color: #5A4637;
-            padding: 12px 25px;
-            font-size: 18px;
+            padding: 14px 30px;
+            font-size: 20px;
             font-weight: bold;
             border: none;
             border-radius: 10px;
             cursor: pointer;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
             transition: all 0.3s ease;
             text-decoration: none;
         }
