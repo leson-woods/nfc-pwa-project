@@ -77,7 +77,7 @@
                 }
             }
             
-            // 监听用户与页面的第一次交互，触发播放
+            // 监听用户交互，确保安卓浏览器能触发播放
             function enableAudioPlayback() {
                 audio.muted = false;
                 audio.play().then(() => {
@@ -87,10 +87,12 @@
                 });
                 document.removeEventListener("click", enableAudioPlayback);
                 document.removeEventListener("touchstart", enableAudioPlayback);
+                document.removeEventListener("scroll", enableAudioPlayback);
             }
             
             document.addEventListener("click", enableAudioPlayback);
             document.addEventListener("touchstart", enableAudioPlayback);
+            document.addEventListener("scroll", enableAudioPlayback);
             
             playPauseButton.addEventListener("click", togglePlayPause);
         });
