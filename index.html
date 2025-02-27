@@ -49,13 +49,6 @@
             background: linear-gradient(135deg, #FFD700, #B8860B);
             transform: scale(1.05);
         }
-        .hidden-button {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            opacity: 0;
-            pointer-events: none;
-        }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(-10px); }
             to { opacity: 1; transform: translateY(0); }
@@ -66,15 +59,13 @@
     <div class="container">
         <h1>To My Love, Forever and Always ❤️</h1>
         <button class="button" id="playPauseButton">🎵 Play Music</button>
-        <button class="hidden-button" id="hiddenPlayButton"></button>
-        <audio id="bgMusic" src="assets/background-music.mp3" loop></audio>
+        <audio id="bgMusic" src="assets/background-music.mp3" loop muted></audio>
     </div>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             var audio = document.getElementById("bgMusic");
             var playPauseButton = document.getElementById("playPauseButton");
-            var hiddenPlayButton = document.getElementById("hiddenPlayButton");
             
             function togglePlayPause() {
                 if (audio.paused) {
@@ -86,18 +77,26 @@
                 }
             }
             
-            // 1.5 秒后模拟点击隐藏播放按钮
-            setTimeout(() => {
-                hiddenPlayButton.click();
-            }, 1500);
-            
-            hiddenPlayButton.addEventListener("click", function() {
+            // 监听用户的第一个交互事件，解除静音并播放音乐
+            function enableAudioPlayback() {
+                audio.muted = false;
                 audio.play().then(() => {
                     playPauseButton.textContent = "⏸ Pause Music";
                 }).catch(error => {
-                    console.log("Autoplay blocked, requiring user interaction: ", error);
+                    console.log("Playback still blocked: ", error);
                 });
-            });
+                
+                // 只监听一次用户交互，触发后移除监听器
+                document.removeEventListener("click", enableAudioPlayback);
+                document.removeEventListener("touchstart", enableAudioPlayback);
+                document.removeEventListener("scroll", enableAudioPlayback);
+                document.removeEventListener("keydown", enableAudioPlayback);
+            }
+            
+            document.addEventListener("click", enableAudioPlayback);
+            document.addEventListener("touchstart", enableAudioPlayback);
+            document.addEventListener("scroll", enableAudioPlayback);
+            document.addEventListener("keydown", enableAudioPlayback);
             
             playPauseButton.addEventListener("click", togglePlayPause);
         });
