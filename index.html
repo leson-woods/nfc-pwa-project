@@ -77,10 +77,12 @@
                 }
             }
             
-            // 自动模拟点击按钮播放音乐
-            setTimeout(() => {
-                playPauseButton.click();
-            }, 1000); // 1秒后自动点击
+            // 直接尝试播放音乐，防止浏览器拦截
+            audio.play().then(() => {
+                playPauseButton.textContent = "⏸ Pause Music";
+            }).catch(error => {
+                console.log("Autoplay blocked, requiring user interaction: ", error);
+            });
             
             playPauseButton.addEventListener("click", togglePlayPause);
         });
